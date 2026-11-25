@@ -4,27 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gleichlauf: Abläufe automatisieren, Ihr Team gibt frei</title>
-<meta name="description" content="Aus Mails, PDFs und Listen werden fertige Entwürfe für Offerten, Rechnungen, Nachfassen und Berichte. Ihr Team gibt nur noch frei. Automatisierung für Schweizer KMU.">
+<meta name="description" content="Felix Biernath automatisiert Offerten, Rechnungen, Nachfassen und Berichte für Schweizer KMU. Jede Automatik legt zuerst einen Entwurf bereit, Ihr Team gibt frei.">
 <meta property="og:title" content="Gleichlauf: Ihr Team gibt frei. Den Rest erledigt der Ablauf.">
 <meta property="og:description" content="Automatisierung für Schweizer KMU: Offerten, Rechnungen, Nachfassen und Berichte als fertige Entwürfe.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#FBF6EE">
-<link rel="icon" type="image/svg+xml" href="marke-zeichen.svg">
-<link rel="preload" href="young-serif-400.woff2" as="font" type="font/woff2" crossorigin>
+<meta property="og:url" content="https://gleichlauf.ch/">
+<meta property="og:image" content="https://gleichlauf.ch/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F5F1E8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="familjen-grotesk-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
-<noscript><style>.stage-wrap{display:none}.reveal{opacity:1!important;transform:none!important}</style></noscript>
+<noscript><style>.stage-wrap,.try,.build{display:none}.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt</a>
-<div class="takt-progress" aria-hidden="true"><span class="tp-line"></span><span class="tp-hohl"></span><span class="tp-voll"></span></div>
+<div class="takt-progress" aria-hidden="true"><span class="tp-track tp-t1"></span><span class="tp-track tp-t2"></span><span class="tp-navy"></span><span class="tp-orange"></span></div>
 
 <header class="top">
   <div class="wrap bar">
-    <a class="brand" href="./" aria-label="Gleichlauf, zur Startseite"><img class="logo" src="marke-wortmarke.svg" width="6100" height="800" alt="Gleichlauf"></a>
+    <a class="brand" href="./" aria-label="Gleichlauf, zur Startseite"><img class="logo" src="marke-wortmarke.svg" width="177" height="30" alt="Gleichlauf"></a>
     <nav aria-label="Hauptmenü">
       <a class="n-opt" href="#ablaeufe">Abläufe</a>
+      <a class="n-opt" href="#probieren">Ausprobieren</a>
       <a class="n-opt" href="#rechner">Rechner</a>
-      <a class="n-opt" href="#vorgehen">Vorgehen</a>
+      <a class="n-opt" href="#ueber-mich">Über mich</a>
       <a class="btn btn-small" data-mail href="mailto:felix@gleichlauf.ch?subject=Gespr%C3%A4ch%20zur%20Automatisierung">Gespräch</a>
     </nav>
   </div>
@@ -36,13 +41,17 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <p class="kicker">Automatisierung für Schweizer KMU</p>
+      <p class="kicker">Hallo, ich bin Felix. Ich automatisiere für Schweizer KMU.</p>
       <h1>Ihr Team gibt frei. <span class="h1-zwei">Den Rest erledigt der Ablauf.</span></h1>
-      <p class="lead">Ich automatisiere Offerten, Rechnungen, Nachfassen und Berichte. Jede Automatik legt zuerst einen fertigen Entwurf bereit, und nichts geht raus, bevor jemand aus Ihrem Team es gesehen hat.</p>
+      <p class="lead">Ich baue die Abläufe, die in Ihrem Betrieb heute von Hand laufen: Offerten, Rechnungen, Nachfassen, Berichte. Jede Automatik legt zuerst einen fertigen Entwurf bereit, und nichts geht raus, bevor jemand aus Ihrem Team es gesehen hat.</p>
       <p class="cta">
         <a class="btn" data-mail href="mailto:felix@gleichlauf.ch?subject=Gespr%C3%A4ch%20zur%20Automatisierung">20 Minuten Gespräch</a>
-        <a class="btn-quiet" href="#rechner">Zeitgewinn ausrechnen</a>
+        <a class="btn-quiet" href="#probieren">Selbst ausprobieren</a>
       </p>
+      <div class="from">
+        <img src="marke-kachel.svg" width="52" height="52" alt="">
+        <p><strong>Felix Biernath, Gleichlauf</strong>Sie schreiben direkt an mich. Ich lese und beantworte jede Mail selbst.</p>
+      </div>
       <p class="hero-facts">Erstes Gespräch unverbindlich. Gleichlauf ist neu, Referenzen gibt es noch nicht. Darum zeige ich Ihnen vor einem Auftrag an Ihren eigenen Beispielen, wie der Ablauf aussehen würde.</p>
     </div>
 
@@ -56,16 +65,16 @@
       </div>
       <div class="stage" id="stage" role="tabpanel" aria-labelledby="tab-offerte">
         <div class="z z-in">
-          <p class="z-label"><span class="z-dot"></span>Eingang</p>
+          <p class="z-label"><span class="lane" aria-hidden="true"></span>Eingang</p>
           <div class="in-file"><span class="in-name" data-x="datei"></span><span class="in-meta" data-x="meta"></span></div>
           <p class="in-text" data-x="text"></p>
         </div>
         <div class="z z-read">
-          <p class="z-label"><span class="z-dot z-dot-voll"></span>Gelesen</p>
+          <p class="z-label"><span class="lane" aria-hidden="true"></span>Gelesen</p>
           <ul class="chips" data-x="chips"></ul>
         </div>
         <div class="z z-out">
-          <p class="z-label"><span class="z-dot z-dot-voll"></span><span data-x="kopf">Entwurf</span></p>
+          <p class="z-label"><span class="lane" aria-hidden="true"></span><span data-x="kopf">Entwurf</span></p>
           <div class="out-body" data-x="out"></div>
           <div class="out-actions">
             <span class="pill pill-main" data-x="freigeben">Freigeben</span>
@@ -82,7 +91,7 @@
   </div>
 </section>
 
-<!-- Takt-Linie + Ticker -->
+<!-- Ticker -->
 <div class="takt-band">
   <div class="ticker" aria-label="Typische Aufgaben">
     <ul class="tick-list">
@@ -145,6 +154,36 @@
   </div>
 </section>
 
+<!-- Ausprobieren -->
+<section id="probieren" class="sec sec-paper">
+  <div class="wrap">
+    <p class="kicker">Ausprobieren</p>
+    <h2>Fügen Sie einen eigenen Text ein und schauen Sie zu</h2>
+    <p class="sec-lead">Eine Anfrage, eine Rechnung, eine Mahnung: Der Ablauf liest heraus, was darin steckt. Das passiert nur in Ihrem Browser, nichts wird gesendet.</p>
+
+    <div class="try">
+      <div class="try-in">
+        <div class="try-samples" role="group" aria-label="Beispieltext einsetzen">
+          <span class="try-lab">Beispiel:</span>
+          <button type="button" class="chip-light" data-sample="anfrage">Anfrage</button>
+          <button type="button" class="chip-light" data-sample="rechnung">Rechnung</button>
+          <button type="button" class="chip-light" data-sample="mahnung">Mahnung</button>
+        </div>
+        <label for="try-text" class="sr">Ihr Text</label>
+        <textarea id="try-text" rows="9" placeholder="Hier einen Text einfügen, zum Beispiel eine Kundenanfrage oder den Text einer Rechnung."></textarea>
+        <p class="try-hint">Eingefügte Texte verlassen Ihren Browser nicht. Bitte trotzdem nichts Vertrauliches einfügen.</p>
+      </div>
+      <div class="try-out" aria-live="polite">
+        <p class="try-head" id="try-head">Gelesen</p>
+        <div class="try-text" id="try-marked"></div>
+        <ul class="found" id="try-found"></ul>
+        <p class="try-note">Echte Abläufe lesen genauer und kennen Ihre Begriffe. Das hier ist einfache Mustererkennung.</p>
+        <a class="btn btn-small" id="try-mail" data-mail href="mailto:felix@gleichlauf.ch?subject=Gespr%C3%A4ch%20zur%20Automatisierung">So etwas für meine Texte besprechen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Rechner -->
 <section id="rechner" class="sec sec-dark">
   <div class="wrap calc">
@@ -178,8 +217,53 @@
   </div>
 </section>
 
+<!-- Baukasten -->
+<section id="baukasten" class="sec">
+  <div class="wrap">
+    <p class="kicker">Baukasten</p>
+    <h2>Bauen Sie Ihren Ablauf zusammen</h2>
+    <p class="sec-lead">Wählen Sie, was den Ablauf auslöst, was er tut und wohin das Ergebnis geht. Am Ende gibt immer Ihr Team frei.</p>
+
+    <div class="build">
+      <div class="build-groups">
+        <fieldset class="bg"><legend>1. Wenn</legend>
+          <button type="button" class="chip-light" data-g="trig" data-v="pdf" aria-pressed="true">eine Mail mit PDF kommt</button>
+          <button type="button" class="chip-light" data-g="trig" data-v="form" aria-pressed="false">eine Anfrage übers Formular kommt</button>
+          <button type="button" class="chip-light" data-g="trig" data-v="excel" aria-pressed="false">in der Excel-Liste eine Zeile dazukommt</button>
+          <button type="button" class="chip-light" data-g="trig" data-v="montag" aria-pressed="false">es Montag 7 Uhr ist</button>
+        </fieldset>
+        <fieldset class="bg"><legend>2. Dann</legend>
+          <button type="button" class="chip-light" data-g="akt" data-v="lesen" aria-pressed="true">liest der Ablauf die Angaben heraus</button>
+          <button type="button" class="chip-light" data-g="akt" data-v="entwurf" aria-pressed="false">entsteht ein fertiger Entwurf</button>
+          <button type="button" class="chip-light" data-g="akt" data-v="liste" aria-pressed="false">entsteht eine Liste mit allem Offenen</button>
+          <button type="button" class="chip-light" data-g="akt" data-v="zahlen" aria-pressed="false">werden die Zahlen zusammengefasst</button>
+        </fieldset>
+        <fieldset class="bg"><legend>3. Ablage</legend>
+          <button type="button" class="chip-light" data-g="ziel" data-v="postfach" aria-pressed="true">als Entwurf im Postfach</button>
+          <button type="button" class="chip-light" data-g="ziel" data-v="buchhaltung" aria-pressed="false">in Ihrer Buchhaltung</button>
+          <button type="button" class="chip-light" data-g="ziel" data-v="excel" aria-pressed="false">in Ihrer Excel-Liste</button>
+          <button type="button" class="chip-light" data-g="ziel" data-v="team" aria-pressed="false">als Mail an Ihr Team</button>
+        </fieldset>
+      </div>
+
+      <ol class="flow" id="flow" aria-label="Ihr Ablauf">
+        <li class="node" data-n="trig"><span class="node-k">Auslöser</span><span class="node-v" id="n-trig"></span></li>
+        <li class="conn" aria-hidden="true"></li>
+        <li class="node" data-n="akt"><span class="node-k">Der Ablauf</span><span class="node-v" id="n-akt"></span></li>
+        <li class="conn" aria-hidden="true"></li>
+        <li class="node" data-n="ziel"><span class="node-k">Ablage</span><span class="node-v" id="n-ziel"></span></li>
+        <li class="conn" aria-hidden="true"></li>
+        <li class="node node-frei" data-n="frei"><span class="node-k">Immer</span><span class="node-v">Ihr Team gibt frei</span></li>
+      </ol>
+
+      <p class="build-sentence" id="build-sentence" aria-live="polite"></p>
+      <p class="cta cta-one"><a class="btn" id="build-mail" data-mail href="mailto:felix@gleichlauf.ch">Diesen Ablauf besprechen</a></p>
+    </div>
+  </div>
+</section>
+
 <!-- Vorgehen -->
-<section id="vorgehen" class="sec">
+<section id="vorgehen" class="sec sec-paper">
   <div class="wrap">
     <p class="kicker">Vorgehen</p>
     <h2>So läuft es ab</h2>
@@ -192,9 +276,18 @@
   </div>
 </section>
 
-<!-- Haltung -->
-<section class="sec sec-paper">
+<!-- Über mich -->
+<section id="ueber-mich" class="sec">
   <div class="wrap two">
+    <div class="about">
+      <img class="about-tile" src="marke-kachel.svg" width="96" height="96" alt="">
+      <p class="kicker">Über mich</p>
+      <h2>Hallo, ich bin Felix.</h2>
+      <p>Ich baue Automatisierungen für Abläufe, die in Schweizer KMU noch von Hand erledigt werden: Anfragen abtippen, Rechnungen erfassen, Zahlen zusammenkopieren. Gleichlauf ist mein Einzelunternehmen in Mellingen AG.</p>
+      <p>Bei mir gibt es kein Verkaufsteam und keine Hotline. Sie schreiben mir, ich lese Ihre Mail selbst und antworte selbst. Und weil ich den Ablauf baue, sprechen Sie von Anfang bis Ende mit derselben Person.</p>
+      <p>Der Name steht für das Zeichen oben: zwei Spuren, die nebeneinander laufen und auf derselben Linie enden. So soll es auch bei Ihnen sein, Ihr Team und der Ablauf im selben Takt, und am Ende entscheidet Ihr Team.</p>
+      <p class="sign">Felix Biernath</p>
+    </div>
     <div>
       <p class="kicker">Haltung</p>
       <h2>Was bei mir anders ist</h2>
@@ -205,11 +298,23 @@
         <li><strong>Ehrlich, wenn es sich nicht lohnt.</strong> Dann sage ich es im Gespräch und nicht erst nach dem Auftrag.</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="fragen" class="sec sec-paper">
+  <div class="wrap faq-wrap">
     <div>
-      <p class="kicker">Wer dahintersteht</p>
-      <h2>Sie sprechen mit mir</h2>
-      <p>Ich bin Felix Biernath und baue Automatisierungen für Abläufe, die in Schweizer KMU von Hand erledigt werden. Gleichlauf ist ein Einzelunternehmen in Mellingen AG. Sie sprechen mit mir und nicht mit einem Verkaufsteam.</p>
-      <p>Der Name steht für das Zeichen oben: Ihr Team und der Ablauf laufen im selben Takt, und am Ende entscheidet immer Ihr Team.</p>
+      <p class="kicker">Fragen</p>
+      <h2>Was mich KMU oft fragen</h2>
+      <p class="sec-lead">Steht Ihre Frage nicht dabei, schreiben Sie sie mir.</p>
+    </div>
+    <div class="faq">
+      <details><summary>Brauche ich neue Software?</summary><p>Nein. Ich baue in das ein, was Sie schon nutzen: Ihr Postfach, Ihre Excel-Listen, Ihre Buchhaltung. Hat ein Programm keine Schnittstelle, sage ich es Ihnen gleich im Gespräch.</p></details>
+      <details><summary>Was passiert mit unseren Daten?</summary><p>Vor dem Aufbau sage ich Ihnen, welche Daten wohin gehen und wer sie sieht. Das steht dann auch in der Beschreibung, die Sie bei der Übergabe erhalten.</p></details>
+      <details><summary>Was kostet das?</summary><p>Das hängt vom Ablauf ab. Sie erfahren den Preis, bevor Sie etwas beauftragen, und das erste Gespräch kostet nichts.</p></details>
+      <details><summary>Was, wenn die Automatik sich irrt?</summary><p>Genau deshalb gibt Ihr Team frei. Anfangs prüft es jeden Entwurf, und Fehler korrigieren Sie, bevor etwas rausgeht. Wie genau der Ablauf liest, zeige ich Ihnen vorab an Ihren eigenen Beispielen.</p></details>
+      <details><summary>Warum soll ich das einer einzelnen Person anvertrauen?</summary><p>Weil Sie die Person kennen, die Ihren Ablauf baut. Vor dem Aufbau kläre ich mit Ihnen, wo der Ablauf läuft und wie Ihr Team ihn anhält. Das alles steht schriftlich in der Beschreibung, die Sie bekommen.</p></details>
     </div>
   </div>
 </section>
@@ -228,7 +333,7 @@
       <button type="button" class="chip-btn chip-lg" data-thema="Etwas anderes">Etwas anderes</button>
     </fieldset>
     <p class="cta cta-one"><a class="btn btn-big" id="close-mail" data-mail href="mailto:felix@gleichlauf.ch?subject=Gespr%C3%A4ch%20zur%20Automatisierung">Mail an Felix Biernath</a></p>
-    <p class="muted">felix@gleichlauf.ch</p>
+    <p class="muted"><span>felix@gleichlauf.ch</span> <button class="copy" type="button" id="copy-mail">Adresse kopieren</button> <span id="copy-msg" class="copy-msg" role="status"></span></p>
   </div>
 </section>
 
@@ -237,7 +342,7 @@
 <footer class="foot">
   <div class="wrap foot-grid">
     <div>
-      <img class="logo logo-foot" src="marke-wortmarke-hell.svg" width="6100" height="800" alt="Gleichlauf">
+      <img class="logo logo-foot" src="marke-wortmarke-hell.svg" width="177" height="30" alt="Gleichlauf">
       <p>Gleichlauf Felix Biernath<br>Grosse Kirchgasse 8<br>5507 Mellingen</p>
     </div>
     <p><a href="mailto:felix@gleichlauf.ch">felix@gleichlauf.ch</a><br><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>

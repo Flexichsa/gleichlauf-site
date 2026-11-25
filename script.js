@@ -215,9 +215,95 @@
   }));
   $$("[data-thema]").forEach((b) => b.setAttribute("aria-pressed", "false"));
 
-  /* ---------- Einblenden beim Scrollen und Takt-Anzeige (nur ohne «Bewegung reduzieren») ---------- */
+  /* ---------- Ausprobieren: Text einfügen, Angaben werden herausgelesen (nur im Browser) ---------- */
+  const SAMPLES = {
+    anfrage: "Guten Tag\n\nwir möchten unser Badezimmer (6 m²) in der Musterstrasse 12, 5000 Aarau sanieren. Dusche statt Wanne, neue Platten. Start gerne im März, eine Offerte bis 15.12.2026 wäre toll. Sie erreichen mich unter 079 123 45 67 oder familie.beispiel@muster.ch.\n\nFreundliche Grüsse\nFamilie Beispiel",
+    rechnung: "Muster Werkzeug AG, Rechnung Nr. 4471 vom 18.11.2026\n\nWerkzeug und Verbrauchsmaterial, 12 Stück Akkuschrauber-Sets. Total CHF 1'284.50 inkl. MWST. Zahlbar innert 30 Tagen bis 24.12.2026 auf CH93 0076 2011 6238 5295 7.\n\nRückfragen: buchhaltung@muster-werkzeug.ch",
+    mahnung: "Erinnerung: Die Rechnung R-2026-204 über CHF 3'450.00 war am 12.11.2026 fällig. Bitte überweisen Sie den Betrag innert 10 Tagen. Dringend: Die Offerte 097 vom 03.11.2026 wartet noch auf Ihre Antwort."
+  };
+  const TYPEN = [
+    ["IBAN", "t-iban", /\bCH\d{2}(?:\s?\d{4}){4}\s?\d\b/g],
+    ["E-Mail", "t-kontakt", /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g],
+    ["Telefon", "t-kontakt", /(?:\+41|0041|0)\s?\(?\d{2}\)?[\s.]?\d{3}[\s.]?\d{2}[\s.]?\d{2}(?!\d)/g],
+    ["Betrag", "t-betrag", /(?:CHF|Fr\.|SFr\.?|EUR|€)\s?\d{1,3}(?:['’]\d{3})*(?:[.,]\d{1,2})?(?:\.-)?|\b\d{1,3}(?:['’]\d{3})*[.,]\d{2}\s?(?:CHF|Franken|Fr\.)/g],
+    ["Datum", "t-datum", /\b\d{1,2}\.\d{1,2}\.(?:\d{4}|\d{2})\b|\b\d{1,2}\.\s?(?:Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)(?:\s\d{4})?/g],
+    ["Nummer", "t-nummer", /\b(?:Rechnung|Offerte|Auftrag|Bestellung|Referenz|Lieferschein)(?:s?-?(?:nummer|nr\.?))?\s*(?:Nr\.?\s*)?[:#]?\s*[A-Z]{0,2}-?\d[\d\-\/]{2,}\b|\b[A-Z]{1,2}-\d{4}-\d{2,}\b/gi],
+    ["PLZ, Ort", "t-ort", /\b[1-9]\d{3}\s+[A-ZÄÖÜ][\wäöüéèà.\-]+(?:\s[A-ZÄÖÜ][\wäöüéèà.\-]+)?/g],
+    ["Menge", "t-menge", /\b\d+(?:[.,]\d+)?\s?(?:m²|m2|qm|Stück|Stk\.?|kg|Std\.?|Stunden)(?![\wäöü])/gi],
+    ["Frist", "t-frist", /\b(?:dringend|sofort|innert \d+ Tagen|innerhalb von \d+ Tagen|bis (?:Ende|spätestens) [^.,;\n]{3,24})/gi]
+  ];
+  const tryText = $("#try-text"), tryMarked = $("#try-marked"), tryFound = $("#try-found"), tryHead = $("#try-head"), tryMail = $("#try-mail");
+  function lies(text) {
+    const treffer = [];
+    TYPEN.forEach(([label, klasse, re]) => {
+      re.lastIndex = 0; let m;
+      while ((m = re.exec(text))) { if (!m[0].trim()) { re.lastIndex++; continue; } treffer.push({ s: m.index, e: m.index + m[0].length, label, klasse, t: m[0] }); }
+    });
+    treffer.sort((a, b) => a.s - b.s || (b.e - b.s) - (a.e - a.s));
+    const frei = []; let ende = -1;
+    treffer.forEach((t) => { if (t.s >= ende) { frei.push(t); ende = t.e; } });
+    return frei;
+  }
+  function zeigeLesen() {
+    const text = tryText.value, t = lies(text);
+    if (!text.trim()) { tryMarked.innerHTML = '<span class="empty">Fügen Sie links einen Text ein oder wählen Sie ein Beispiel.</span>'; tryFound.innerHTML = ""; tryHead.textContent = "Gelesen"; return; }
+    let html = "", pos = 0;
+    t.forEach((x) => { html += esc(text.slice(pos, x.s)) + `<mark class="${x.klasse}" title="${esc(x.label)}">${esc(x.t)}</mark>`; pos = x.e; });
+    html += esc(text.slice(pos));
+    tryMarked.innerHTML = html;
+    const gruppen = {}; t.forEach((x) => { gruppen[x.label] = (gruppen[x.label] || 0) + 1; });
+    tryFound.innerHTML = t.slice(0, 18).map((x) => `<li class="${x.klasse}"><span class="f-k">${esc(x.label)}</span><span class="f-v">${esc(x.t.trim())}</span></li>`).join("");
+    tryHead.textContent = t.length ? `Gelesen: ${t.length} ${t.length === 1 ? "Angabe" : "Angaben"}` : "Gelesen: nichts Erkennbares";
+    const kurz = Object.entries(gruppen).map(([k, n]) => `${n}× ${k}`).join(", ") || "noch nichts";
+    tryMail.href = `mailto:${MAIL}?subject=${encodeURIComponent("Gespräch zur Automatisierung: Texte lesen")}&body=${encodeURIComponent("Guten Tag Herr Biernath\n\nIch habe auf Ihrer Seite einen Text ausprobiert (gelesen wurden: " + kurz + ").\nSo etwas würde ich gerne für unsere Texte besprechen.\n")}`;
+  }
+  tryText.addEventListener("input", () => { $$("[data-sample]").forEach((b) => b.setAttribute("aria-pressed", "false")); zeigeLesen(); });
+  $$("[data-sample]").forEach((b) => b.addEventListener("click", () => {
+    tryText.value = SAMPLES[b.dataset.sample];
+    $$("[data-sample]").forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+    zeigeLesen();
+  }));
+  $$("[data-sample]").forEach((b) => b.setAttribute("aria-pressed", "false"));
+  tryText.value = SAMPLES.anfrage; $('[data-sample="anfrage"]').setAttribute("aria-pressed", "true"); zeigeLesen();
+
+  /* ---------- Baukasten ---------- */
+  const BAU = {
+    trig: { pdf: ["Mail mit PDF", "Wenn eine Mail mit PDF eintrifft,"], form: ["Anfrage übers Formular", "Wenn eine Anfrage über Ihr Formular kommt,"], excel: ["Neue Excel-Zeile", "Wenn in Ihrer Excel-Liste eine Zeile dazukommt,"], montag: ["Montag, 7 Uhr", "Jeden Montag um 7 Uhr"] },
+    akt: { lesen: ["Angaben lesen", "liest der Ablauf die Angaben heraus"], entwurf: ["Entwurf erstellen", "erstellt der Ablauf einen fertigen Entwurf"], liste: ["Liste bilden", "bildet der Ablauf eine Liste mit allem Offenen"], zahlen: ["Zahlen zusammenfassen", "fasst der Ablauf die Zahlen zusammen"] },
+    ziel: { postfach: ["Entwurf im Postfach", "und legt das Ergebnis als Entwurf in Ihrem Postfach ab"], buchhaltung: ["Ihre Buchhaltung", "und übergibt das Ergebnis Ihrer Buchhaltung zur Übernahme"], excel: ["Ihre Excel-Liste", "und trägt das Ergebnis in Ihre Excel-Liste ein"], team: ["Mail an Ihr Team", "und schickt das Ergebnis per Mail an Ihr Team"] }
+  };
+  const wahl = { trig: "pdf", akt: "lesen", ziel: "postfach" };
+  const bauMail = $("#build-mail"), bauSatz = $("#build-sentence");
+  function baue(animiert) {
+    ["trig", "akt", "ziel"].forEach((g) => { $("#n-" + g).textContent = BAU[g][wahl[g]][0]; });
+    const satz = `${BAU.trig[wahl.trig][1]} ${BAU.akt[wahl.akt][1]} ${BAU.ziel[wahl.ziel][1]}. Danach gibt Ihr Team frei.`;
+    bauSatz.textContent = satz;
+    bauMail.href = `mailto:${MAIL}?subject=${encodeURIComponent("Ablauf besprechen")}&body=${encodeURIComponent("Guten Tag Herr Biernath\n\nIch habe auf Ihrer Seite einen Ablauf zusammengestellt:\n" + satz + "\n\nDas würde ich gerne mit Ihnen besprechen.\n")}`;
+    if (animiert && !reduce.matches) $$(".flow .node").forEach((n, i) => { n.classList.remove("pulse"); setTimeout(() => n.classList.add("pulse"), 90 * i); setTimeout(() => n.classList.remove("pulse"), 90 * i + 520); });
+  }
+  $$("[data-g]").forEach((b) => b.addEventListener("click", () => {
+    wahl[b.dataset.g] = b.dataset.v;
+    $$(`[data-g="${b.dataset.g}"]`).forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+    baue(true);
+  }));
+  baue(false);
+
+  /* ---------- Adresse kopieren ---------- */
+  const kopie = $("#copy-mail"), kopieMsg = $("#copy-msg");
+  if (kopie) kopie.addEventListener("click", async () => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(MAIL); ok = true; } catch (e) {
+      const t = document.createElement("textarea"); t.value = MAIL; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select();
+      try { ok = document.execCommand("copy"); } catch (e2) { ok = false; }
+      document.body.removeChild(t);
+    }
+    kopieMsg.textContent = ok ? "Kopiert" : "Bitte von Hand kopieren";
+    setTimeout(() => { kopieMsg.textContent = ""; }, 2600);
+  });
+
+  /* ---------- Einblenden beim Scrollen und Lesefortschritt (nur ohne «Bewegung reduzieren») ---------- */
   if (!reduce.matches && "IntersectionObserver" in window) {
-    const ziele = $$(".case, .steps li, .plain li, .sec h2, .sec .sec-lead, .calc-out, .close-chips, .two > div");
+    const ziele = $$(".case, .steps li, .plain li, .sec h2, .sec .sec-lead, .calc-out, .close-chips, .two > div, .try-in, .try-out, .build-groups, .flow, .build-sentence, .faq details");
     ziele.forEach((e, i) => { e.classList.add("reveal"); e.style.setProperty("--d", (i % 4) * 70 + "ms"); });
     const io = new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
     ziele.forEach((e) => io.observe(e));
@@ -227,9 +313,7 @@
     const upd = () => {
       ticking = false;
       const h = document.documentElement.scrollHeight - innerHeight;
-      const p = h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 0;
-      bar.style.setProperty("--p", p.toFixed(4));
-      bar.style.setProperty("--gap", (14 + (1 - p) * 46).toFixed(1) + "px");
+      bar.style.setProperty("--p", (h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 0).toFixed(4));
     };
     addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
     addEventListener("resize", upd); upd();
