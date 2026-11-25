@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gleichlauf: Abläufe automatisieren, Ihr Team gibt frei</title>
+<meta name="description" content="Aus Mails, PDFs und Listen werden fertige Entwürfe für Offerten, Rechnungen, Nachfassen und Berichte. Ihr Team gibt nur noch frei. Automatisierung für Schweizer KMU.">
+<meta property="og:title" content="Gleichlauf: Ihr Team gibt frei. Den Rest erledigt der Ablauf.">
+<meta property="og:description" content="Automatisierung für Schweizer KMU: Offerten, Rechnungen, Nachfassen und Berichte als fertige Entwürfe.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FBF6EE">
+<link rel="icon" type="image/svg+xml" href="marke-zeichen.svg">
+<link rel="preload" href="young-serif-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<noscript><style>.stage-wrap{display:none}.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt</a>
+<div class="takt-progress" aria-hidden="true"><span class="tp-line"></span><span class="tp-hohl"></span><span class="tp-voll"></span></div>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="./" aria-label="Gleichlauf, zur Startseite"><img class="logo" src="marke-wortmarke.svg" width="6100" height="800" alt="Gleichlauf"></a>
+    <nav aria-label="Hauptmenü">
+      <a class="n-opt" href="#ablaeufe">Abläufe</a>
+      <a class="n-opt" href="#rechner">Rechner</a>
+      <a class="n-opt" href="#vorgehen">Vorgehen</a>
+      <a class="btn btn-small" data-mail href="mailto:felix@gleichlauf.ch?subject=Gespr%C3%A4ch%20zur%20Automatisierung">Gespräch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inhalt">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="kicker">Automatisierung für Schweizer KMU</p>
+      <h1>Ihr Team gibt frei. <span class="h1-zwei">Den Rest erledigt der Ablauf.</span></h1>
+      <p class="lead">Ich automatisiere Offerten, Rechnungen, Nachfassen und Berichte. Jede Automatik legt zuerst einen fertigen Entwurf bereit, und nichts geht raus, bevor jemand aus Ihrem Team es gesehen hat.</p>
+      <p class="cta">
+        <a class="btn" data-mail href="mailto:felix@gleichlauf.ch?subject=Gespr%C3%A4ch%20zur%20Automatisierung">20 Minuten Gespräch</a>
+        <a class="btn-quiet" href="#rechner">Zeitgewinn ausrechnen</a>
+      </p>
+      <p class="hero-facts">Erstes Gespräch unverbindlich. Gleichlauf ist neu, Referenzen gibt es noch nicht. Darum zeige ich Ihnen vor einem Auftrag an Ihren eigenen Beispielen, wie der Ablauf aussehen würde.</p>
+    </div>
+
+    <!-- Live-Ablauf -->
+    <div class="stage-wrap" id="ablauf-live">
+      <div class="stage-tabs" role="tablist" aria-label="Ablauf wählen">
+        <button role="tab" id="tab-offerte" aria-controls="stage" aria-selected="true" data-fall="offerte">Offerte</button>
+        <button role="tab" id="tab-rechnung" aria-controls="stage" aria-selected="false" tabindex="-1" data-fall="rechnung">Rechnung</button>
+        <button role="tab" id="tab-nachfassen" aria-controls="stage" aria-selected="false" tabindex="-1" data-fall="nachfassen">Nachfassen</button>
+        <button role="tab" id="tab-zahlen" aria-controls="stage" aria-selected="false" tabindex="-1" data-fall="zahlen">Zahlen</button>
+      </div>
+      <div class="stage" id="stage" role="tabpanel" aria-labelledby="tab-offerte">
+        <div class="z z-in">
+          <p class="z-label"><span class="z-dot"></span>Eingang</p>
+          <div class="in-file"><span class="in-name" data-x="datei"></span><span class="in-meta" data-x="meta"></span></div>
+          <p class="in-text" data-x="text"></p>
+        </div>
+        <div class="z z-read">
+          <p class="z-label"><span class="z-dot z-dot-voll"></span>Gelesen</p>
+          <ul class="chips" data-x="chips"></ul>
+        </div>
+        <div class="z z-out">
+          <p class="z-label"><span class="z-dot z-dot-voll"></span><span data-x="kopf">Entwurf</span></p>
+          <div class="out-body" data-x="out"></div>
+          <div class="out-actions">
+            <span class="pill pill-main" data-x="freigeben">Freigeben</span>
+            <span class="pill" data-x="korrigieren">Korrigieren</span>
+            <span class="out-done" data-x="done"></span>
+          </div>
+        </div>
+      </div>
+      <div class="stage-ctrl">
+        <button class="ctrl" id="stage-pause" type="button" aria-pressed="false"><span class="ctrl-ico" aria-hidden="true"></span><span class="ctrl-txt">Pause</span></button>
+        <p class="stage-cap">Beispieldaten, erfundene Namen. So liegt der Entwurf morgens bei Ihrem Team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Takt-Linie + Ticker -->
+<div class="takt-band">
+  <div class="ticker" aria-label="Typische Aufgaben">
+    <ul class="tick-list">
+      <li>Offerten</li><li>Eingangsrechnungen</li><li>Mahnungen</li><li>Wochenzahlen</li><li>Terminbestätigungen</li><li>Lieferscheine</li><li>Stundenrapporte</li><li>Spesenbelege</li><li>Kundenanfragen</li><li>Bestellungen</li>
+    </ul>
+    <ul class="tick-list" aria-hidden="true">
+      <li>Offerten</li><li>Eingangsrechnungen</li><li>Mahnungen</li><li>Wochenzahlen</li><li>Terminbestätigungen</li><li>Lieferscheine</li><li>Stundenrapporte</li><li>Spesenbelege</li><li>Kundenanfragen</li><li>Bestellungen</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Vier Abläufe -->
+<section id="ablaeufe" class="sec">
+  <div class="wrap">
+    <p class="kicker">Vier Beispiele</p>
+    <h2>Vier Aufgaben, die in vielen Betrieben Stunden fressen</h2>
+    <p class="sec-lead">Das sind Beispiele, keine Pakete. Welche Aufgabe bei Ihnen am meisten Zeit kostet, klären wir im Gespräch.</p>
+
+    <div class="cases">
+      <article class="case" id="fall-1">
+        <header><span class="case-no">1</span><h3>Kundenanfrage rein, Offertenentwurf raus</h3></header>
+        <div class="ba">
+          <div class="ba-heute"><h4>Heute</h4><p>Anfrage lesen, Angaben in die Vorlage tippen, Preise nachschlagen, PDF speichern, Mail schreiben.</p></div>
+          <div class="ba-mit"><h4>Mit Automatik</h4><p>Die Angaben werden aus der Anfrage gelesen, die Preise kommen aus Ihrer Liste. Die Offerte liegt als Entwurf bereit.</p></div>
+        </div>
+        <p class="case-for">Typisch für Handwerk, Handel, Planung und alle mit Offertwesen.</p>
+        <button class="case-live" type="button" data-zeige="offerte">Live ansehen</button>
+      </article>
+
+      <article class="case" id="fall-2">
+        <header><span class="case-no">2</span><h3>Eingangsrechnungen erfassen und vorkontieren</h3></header>
+        <div class="ba">
+          <div class="ba-heute"><h4>Heute</h4><p>PDF öffnen, Lieferant, Betrag, Fälligkeit abtippen, Konto wählen, auf Doppelte achten.</p></div>
+          <div class="ba-mit"><h4>Mit Automatik</h4><p>Rechnungen aus dem Postfach werden gelesen, Doppelte erkannt, Konto vorgeschlagen. Ihre Buchhaltung gibt frei.</p></div>
+        </div>
+        <p class="case-for">Für jeden Betrieb mit Kreditorenbuchhaltung, ob Abacus, Bexio, Sage oder Excel.</p>
+        <button class="case-live" type="button" data-zeige="rechnung">Live ansehen</button>
+      </article>
+
+      <article class="case" id="fall-3">
+        <header><span class="case-no">3</span><h3>Offene Offerten und Rechnungen nachfassen</h3></header>
+        <div class="ba">
+          <div class="ba-heute"><h4>Heute</h4><p>Wer hat auf die Offerte nie geantwortet, wer nicht bezahlt? Es fällt erst auf, wenn jemand daran denkt.</p></div>
+          <div class="ba-mit"><h4>Mit Automatik</h4><p>Jeden Montag eine Liste, zu jeder Zeile ein Entwurf fürs Nachfassen, im Ton Ihres Hauses.</p></div>
+        </div>
+        <p class="case-for">Für Betriebe mit Offerten über mehrere Wochen und Kunden auf Rechnung.</p>
+        <button class="case-live" type="button" data-zeige="nachfassen">Live ansehen</button>
+      </article>
+
+      <article class="case" id="fall-4">
+        <header><span class="case-no">4</span><h3>Wochenzahlen jeden Montag um 7 Uhr in der Mailbox</h3></header>
+        <div class="ba">
+          <div class="ba-heute"><h4>Heute</h4><p>Jemand zieht Zahlen aus dem System, kopiert sie in Excel und schickt sie los. Fehlt die Person, fehlt der Bericht.</p></div>
+          <div class="ba-mit"><h4>Mit Automatik</h4><p>Auftragsbestand, Umsatz und offene Posten kommen von selbst, mit den Zahlen, die sich geändert haben.</p></div>
+        </div>
+        <p class="case-for">Für Geschäftsleitungen, die Zahlen sehen wollen, ohne dass jemand sie zusammenträgt.</p>
+        <button class="case-live" type="button" data-zeige="zahlen">Live ansehen</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Rechner -->
+<section id="rechner" class="sec sec-dark">
+  <div class="wrap calc">
+    <div class="calc-in">
+      <p class="kicker kicker-hell">Rechner</p>
+      <h2>Was kostet Sie die Handarbeit heute?</h2>
+      <p class="sec-lead sec-lead-hell">Stellen Sie Ihre Zahlen ein. Das Ergebnis ist eine Rechnung mit Ihren Annahmen, keine Zusage.</p>
+
+      <fieldset class="calc-fall"><legend class="sr">Aufgabe wählen</legend>
+        <button type="button" class="chip-btn" data-calc="offerte" aria-pressed="true">Offerten</button>
+        <button type="button" class="chip-btn" data-calc="rechnung" aria-pressed="false">Eingangsrechnungen</button>
+        <button type="button" class="chip-btn" data-calc="nachfassen" aria-pressed="false">Nachfassen</button>
+        <button type="button" class="chip-btn" data-calc="zahlen" aria-pressed="false">Berichte</button>
+      </fieldset>
+
+      <div class="sl"><label for="r-menge">Vorgänge pro Monat</label><output id="o-menge" for="r-menge">25</output><input id="r-menge" type="range" min="1" max="200" step="1" value="25"></div>
+      <div class="sl"><label for="r-min">Minuten Handarbeit je Vorgang</label><output id="o-min" for="r-min">20</output><input id="r-min" type="range" min="1" max="180" step="1" value="20"></div>
+      <div class="sl"><label for="r-pruef">Davon bleibt fürs Prüfen und Freigeben</label><output id="o-pruef" for="r-pruef">25 %</output><input id="r-pruef" type="range" min="2" max="60" step="1" value="25"></div>
+      <div class="sl"><label for="r-satz">Interner Stundenansatz in CHF</label><output id="o-satz" for="r-satz">80</output><input id="r-satz" type="range" min="40" max="200" step="5" value="80"></div>
+    </div>
+
+    <div class="calc-out" aria-live="polite">
+      <p class="co-label">Frei pro Jahr</p>
+      <p class="co-zahl"><span id="c-std">75</span> <span class="co-einheit">Stunden</span></p>
+      <p class="co-label">Gegenwert zum internen Ansatz</p>
+      <p class="co-zahl co-zahl-chf"><span class="co-einheit">CHF</span> <span id="c-chf">6’000</span></p>
+      <p class="co-regel" id="c-regel">25 Vorgänge × 20 Minuten = 8.3 Stunden im Monat. Mit Automatik bleiben 25 % davon fürs Prüfen.</p>
+      <a class="btn btn-hell" id="c-mail" data-mail href="mailto:felix@gleichlauf.ch">Diese Rechnung per Mail schicken</a>
+      <p class="co-fuss">Nicht eingerechnet: der einmalige Aufbau. Den Preis erfahren Sie, bevor Sie etwas beauftragen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Vorgehen -->
+<section id="vorgehen" class="sec">
+  <div class="wrap">
+    <p class="kicker">Vorgehen</p>
+    <h2>So läuft es ab</h2>
+    <ol class="steps">
+      <li><h3>Gespräch, 20 Minuten</h3><p>Wir suchen die eine Aufgabe, die bei Ihnen am meisten Zeit frisst. Ich sage Ihnen ehrlich, ob sie sich automatisieren lässt, und wenn nicht, warum nicht.</p></li>
+      <li><h3>Entwurf an Ihren Beispielen</h3><p>Sie geben mir drei bis fünf echte Beispiele, etwa Rechnungen oder Anfragen. Ich zeige Ihnen, was die Automatik daraus macht, bevor ein Auftrag entsteht.</p></li>
+      <li><h3>Aufbau und Freigabe</h3><p>Ich baue den Ablauf in Ihre bestehenden Programme ein. Anfangs prüft Ihr Team jeden Entwurf. Erst wenn es stimmt, wird weniger geprüft.</p></li>
+      <li><h3>Übergabe</h3><p>Sie erhalten eine kurze Beschreibung, was wann läuft und wie man es anhält. Vorher sage ich Ihnen, welche Daten wohin gehen.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Haltung -->
+<section class="sec sec-paper">
+  <div class="wrap two">
+    <div>
+      <p class="kicker">Haltung</p>
+      <h2>Was bei mir anders ist</h2>
+      <ul class="plain">
+        <li><strong>Freigabe statt Autopilot.</strong> Nichts geht an Ihre Kundschaft, ohne dass Ihr Team es gesehen hat.</li>
+        <li><strong>Ihre Programme bleiben.</strong> Ich baue in das ein, was Sie schon nutzen, und verlange keinen Systemwechsel.</li>
+        <li><strong>Keine Zahl vorab.</strong> Die Rechnungen auf dieser Seite zeigen, wie ich rechne, nicht, was Sie sparen werden.</li>
+        <li><strong>Ehrlich, wenn es sich nicht lohnt.</strong> Dann sage ich es im Gespräch und nicht erst nach dem Auftrag.</li>
+      </ul>
+    </div>
+    <div>
+      <p class="kicker">Wer dahintersteht</p>
+      <h2>Sie sprechen mit mir</h2>
+      <p>Ich bin Felix Biernath und baue Automatisierungen für Abläufe, die in Schweizer KMU von Hand erledigt werden. Gleichlauf ist ein Einzelunternehmen in Mellingen AG. Sie sprechen mit mir und nicht mit einem Verkaufsteam.</p>
+      <p>Der Name steht für das Zeichen oben: Ihr Team und der Ablauf laufen im selben Takt, und am Ende entscheidet immer Ihr Team.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Abschluss -->
+<section id="kontakt" class="sec sec-close">
+  <div class="wrap close">
+    <h2>Was frisst bei Ihnen am meisten Zeit?</h2>
+    <p class="sec-lead">Wählen Sie eine Aufgabe, ich schreibe Ihnen persönlich zurück.</p>
+    <fieldset class="close-chips"><legend class="sr">Aufgabe wählen</legend>
+      <button type="button" class="chip-btn chip-lg" data-thema="Offerten schreiben">Offerten schreiben</button>
+      <button type="button" class="chip-btn chip-lg" data-thema="Rechnungen erfassen">Rechnungen erfassen</button>
+      <button type="button" class="chip-btn chip-lg" data-thema="Nachfassen und Mahnen">Nachfassen und Mahnen</button>
+      <button type="button" class="chip-btn chip-lg" data-thema="Berichte und Zahlen">Berichte und Zahlen</button>
+      <button type="button" class="chip-btn chip-lg" data-thema="Daten von A nach B kopieren">Daten von A nach B kopieren</button>
+      <button type="button" class="chip-btn chip-lg" data-thema="Etwas anderes">Etwas anderes</button>
+    </fieldset>
+    <p class="cta cta-one"><a class="btn btn-big" id="close-mail" data-mail href="mailto:felix@gleichlauf.ch?subject=Gespr%C3%A4ch%20zur%20Automatisierung">Mail an Felix Biernath</a></p>
+    <p class="muted">felix@gleichlauf.ch</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <img class="logo logo-foot" src="marke-wortmarke-hell.svg" width="6100" height="800" alt="Gleichlauf">
+      <p>Gleichlauf Felix Biernath<br>Grosse Kirchgasse 8<br>5507 Mellingen</p>
+    </div>
+    <p><a href="mailto:felix@gleichlauf.ch">felix@gleichlauf.ch</a><br><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></p>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
